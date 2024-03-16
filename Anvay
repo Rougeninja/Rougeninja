@@ -1,0 +1,83 @@
+// Define initial variables
+let population = 100; // Initial population
+let money = 10000; // Initial money
+let energy = 100; // Initial energy
+let water = 100; // Initial water supply
+let happiness = 80; // Initial happiness level
+
+// Function to update game state
+function updateGameState() {
+    // Update population based on residential areas
+    population += 10;
+    
+    // Deduct expenses for energy and water
+    money -= 100;
+    energy -= 5;
+    water -= 10;
+    
+    // Update happiness based on various factors
+    happiness = Math.max(0, happiness - 1); // Decrease happiness over time
+    
+    // Check for game over conditions
+    if (money <= 0 || energy <= 0 || water <= 0 || happiness <= 0) {
+        gameOver();
+    }
+}
+
+// Function to handle game over
+function gameOver() {
+    alert("Game over! Your city has failed. Please try again.");
+    // You can add more actions here such as resetting the game or displaying a game over screen
+}
+
+// Function to build residential areas
+function buildResidentialArea() {
+    if (money >= 1000) {
+        money -= 1000;
+        population += 100;
+        updateGameState();
+    } else {
+        alert("Not enough money to build residential area!");
+    }
+}
+
+// Function to build commercial areas
+function buildCommercialArea() {
+    if (money >= 1500) {
+        money -= 1500;
+        updateGameState();
+    } else {
+        alert("Not enough money to build commercial area!");
+    }
+}
+
+// Function to build industrial areas
+function buildIndustrialArea() {
+    if (money >= 2000) {
+        money -= 2000;
+        updateGameState();
+    } else {
+        alert("Not enough money to build industrial area!");
+    }
+}
+
+// Function to display game status
+function displayStatus() {
+    console.log("Population: " + population);
+    console.log("Money: " + money);
+    console.log("Energy: " + energy);
+    console.log("Water: " + water);
+    console.log("Happiness: " + happiness);
+}
+
+// Initialize the game
+function startGame() {
+    // Display initial game status
+    displayStatus();
+    
+    // Set interval to update game state every second
+    setInterval(updateGameState, 1000);
+}
+
+// Start the game when the page loads
+startGame();
